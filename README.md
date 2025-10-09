@@ -1,3 +1,3 @@
-# PET
+# RFKD
 
-Datasets: https://huggingface.co/datasets/lhkhiem28/PET-datasets
+Datasets: https://huggingface.co/datasets/lhkhiem28/RFKD-datasets
