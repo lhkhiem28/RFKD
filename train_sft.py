@@ -66,10 +66,10 @@ def main(args):
         epoch_loss = 0.
 
         for _, batch in enumerate(train_loader):
-            optimizer.zero_grad()
             loss = model(batch)
             loss.backward()
             optimizer.step()
+            optimizer.zero_grad()
             lr_scheduler.step()
 
             epoch_loss += loss.item()
