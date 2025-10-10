@@ -65,12 +65,13 @@ def main(args):
         model.train()
         epoch_loss = 0.
 
-        for _, batch in enumerate(train_loader):
+        for step, batch in enumerate(train_loader):
             loss = model(batch)
             loss.backward()
             optimizer.step()
             optimizer.zero_grad()
             lr_scheduler.step()
+            progress_bar.update(1)
 
             epoch_loss += loss.item()
 
@@ -78,7 +79,6 @@ def main(args):
                 'train/lr': optimizer.param_groups[0]['lr'],
                 'train/loss': loss.item()
             })
-            progress_bar.update(1)
 
         print(f"Epoch {epoch}|{args.num_epochs}: Train Loss: {epoch_loss / len(train_loader):.4f}")
         if epoch == args.num_epochs:
