@@ -66,7 +66,7 @@ def main(args):
         epoch_loss = 0.
 
         for step, batch in enumerate(train_loader):
-            loss = model(batch)
+            loss = model(batch)["loss"]
             loss.backward()
             optimizer.step()
             optimizer.zero_grad()

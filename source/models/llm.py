@@ -113,7 +113,7 @@ class BaselineLLM(torch.nn.Module):
             return torch.cuda.amp.autocast(dtype=dtype)
         else:
             return contextlib.nullcontext()
-        
+
     def forward(self, samples):
         # encode prompts and labels
         prompts = self.tokenizer(samples["prompt"], add_special_tokens=False)
@@ -163,15 +163,19 @@ class BaselineLLM(torch.nn.Module):
                 ).logits
                 loss = position_weighted_loss(logits, label_input_ids, self.gamma)
             else:
-                loss = self.model(
+                outputs = self.model(
                     inputs_embeds=inputs_embeds,
                     attention_mask=attention_mask,
                     labels=label_input_ids,
                     return_dict=True,
-                ).loss
+                )
+                logits, loss = outputs.logits, outputs.loss
 
-        return loss
-    
+        return {
+            "loss": loss,
+            "logits": logits,
+        }
+
     def inference(self, samples):
         # encode prompts
         prompts = self.tokenizer(samples["prompt"], add_special_tokens=False)
