@@ -29,6 +29,7 @@ def parse_args_llm():
 
     # Inference
     parser.add_argument("--max_completion_length", type=int, default=128)
+    parser.add_argument("--temperature", type=float, default=1.0)
 
     # Checkpoint
     parser.add_argument("--run_name", type=str, default='')

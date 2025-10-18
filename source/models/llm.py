@@ -40,6 +40,7 @@ class BaselineLLM(torch.nn.Module):
         super().__init__()
         self.max_prompt_length = args.max_prompt_length
         self.max_completion_length = args.max_completion_length
+        self.temperature = args.temperature
         if "gemma-2" in args.llm_path:
             self.BOS = '<bos><start_of_turn>user\n'
             self.EOS_USER = '<end_of_turn>\n<start_of_turn>model\n'
@@ -216,7 +217,7 @@ class BaselineLLM(torch.nn.Module):
                 attention_mask=attention_mask,
                 pad_token_id=self.tokenizer.eos_token_id,
                 max_new_tokens=self.max_completion_length,
-                do_sample=False, temperature=1.0, top_k=50, top_p=1.0,
+                do_sample=False, temperature=self.temperature, top_k=50, top_p=1.0,
                 use_cache=True  # IMPORTANT!
             )
         preds = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
