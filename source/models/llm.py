@@ -57,6 +57,9 @@ class BaselineLLM(torch.nn.Module):
             "device_map": "auto",
             "revision": "main",
         }
+        if "grpo" in args.run_name:
+            kwargs.pop("max_memory", None)
+            kwargs.pop("device_map", None)
         self.tokenizer = AutoTokenizer.from_pretrained(args.llm_path, use_fast=False, revision=kwargs["revision"])
         self.tokenizer.pad_token_id = 0
         self.tokenizer.padding_side = 'left'

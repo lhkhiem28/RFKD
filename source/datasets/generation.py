@@ -1,6 +1,6 @@
 import json
 import random
-from datasets import load_dataset
+from datasets import load_dataset, Dataset as HFDataset
 from torch.utils.data import Dataset
 from torch.utils.data import ConcatDataset
 from torch.utils.data import DataLoader

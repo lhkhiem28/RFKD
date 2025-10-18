@@ -56,7 +56,7 @@ def main(args):
         betas=(0.9, 0.999)
     )
     lr_scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, 
-        lambda step: (1e-6 / args.lr) + (1 - step / (args.num_epochs * len(train_loader))) * (1 - 1e-6 / args.lr)
+        lambda step: (0.1) + (1 - step / (args.num_epochs * len(train_loader))) * (1 - 0.1)
     )
 
     # Step 3: Training
