@@ -8,7 +8,6 @@ def parse_args_llm():
     # Model related
     parser.add_argument("--model_name", type=str, default='llm')
     parser.add_argument("--llm_name", type=str)
-    parser.add_argument("--full_ft", action='store_true', default=False)
     parser.add_argument("--lora_r", type=int, default=16)
     parser.add_argument("--n_gpus", type=int, default=4)
 
