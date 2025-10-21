@@ -224,6 +224,6 @@ class BaselineLLM(torch.nn.Module):
         preds = [p.strip() for p in preds]
 
         return {"id": samples["id"],
-                "label": samples['label'],
+                "label": samples["label"],
                 "pred": preds,
         }
